@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Контрольна 100 м · Метання м'яча · Онлайн-заняття з фізичної культури</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Golos+Text:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F1F4F7; --paper:#FFFFFF; --band:#FAFCFF;
+  --ink:#101D2C; --ink2:#33465C; --muted:#61738A;
+  --track:#E8452B; --track-d:#B82E15;
+  --field:#149A5B; --field-d:#0C7A46;
+  --sky:#2D7DD2; --sky-d:#1B5FA8;
+  --sun:#FFB92E; --sun-d:#D89310;
+  --line:#DFE6EC;
+  --disp:'Unbounded',system-ui,sans-serif;
+  --body:'Golos Text',system-ui,sans-serif;
+  --mono:'JetBrains Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--body); color:var(--ink); background:var(--bg);
+  background-image:radial-gradient(#cfd9e2 1px, transparent 1.4px);
+  background-size:26px 26px; line-height:1.6; overflow-x:hidden;
+}
+::selection{background:var(--track);color:#fff}
+img{max-width:100%}
+a{color:var(--sky-d)}
+section{scroll-margin-top:88px}
+
+/* ---------- reveal on scroll ---------- */
+[data-reveal]{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+[data-reveal].in{opacity:1;transform:none}
+
+/* ---------- top progress track ---------- */
+.progress{position:fixed;top:0;left:0;right:0;height:8px;background:#E3E9EF;z-index:200}
+.progress-fill{position:absolute;top:0;bottom:0;left:0;width:0;background:repeating-linear-gradient(-55deg,var(--track) 0 10px,#F26A4E 10px 20px)}
+.progress-run{position:absolute;top:50%;transform:translate(-50%,-58%);font-size:19px;line-height:1;filter:drop-shadow(0 2px 2px rgba(0,0,0,.25));transition:left .1s linear}
+
+/* ---------- header ---------- */
+.top{position:sticky;top:0;z-index:150;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top-in{max-width:1200px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink)}
+.brand-badge{width:42px;height:42px;border-radius:10px;background:var(--track);color:#fff;display:grid;place-items:center;font-family:var(--disp);font-weight:900;font-size:15px;box-shadow:0 3px 0 var(--track-d);flex:none}
+.brand b{font-family:var(--disp);font-size:14px;font-weight:700;display:block;line-height:1.2}
+.brand small{color:var(--muted);font-size:11.5px}
+.nav{display:flex;gap:6px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav a{white-space:nowrap;text-decoration:none;color:var(--ink2);font-weight:600;font-size:13px;padding:8px 13px;border-radius:999px;border:1.5px solid transparent;transition:.2s}
+.nav a:hover{background:#EEF3F8}
+.nav a.active{background:var(--ink);color:#fff}
+
+/* ---------- ticker ---------- */
+.ticker{background:var(--ink);color:#fff;overflow:hidden}
+.ticker-track{display:flex;gap:44px;width:max-content;padding:9px 0;animation:tick 30s linear infinite;font-family:var(--mono);font-size:12.5px;letter-spacing:.08em}
+.ticker-track span{display:flex;align-items:center;gap:10px}
+.ticker-track i{font-style:normal;color:var(--sun)}
+@keyframes tick{to{transform:translateX(-50%)}}
+
+/* ---------- hero ---------- */
+.hero{position:relative;max-width:1200px;margin:0 auto;padding:56px 20px 0}
+.hero::before{content:"100";position:absolute;right:-30px;top:-40px;font-family:var(--disp);font-weight:900;font-size:clamp(160px,26vw,340px);color:transparent;-webkit-text-stroke:2px rgba(16,29,44,.08);pointer-events:none;line-height:1;z-index:0}
+.hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.25fr .95fr;gap:40px;align-items:start}
+.live{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.14em;background:#fff;border:1.5px solid var(--line);border-radius:999px;padding:7px 14px;color:var(--track-d)}
+.live .dot{width:9px;height:9px;border-radius:50%;background:var(--track);animation:pulse 1.6s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(232,69,43,.5)}60%{box-shadow:0 0 0 8px rgba(232,69,43,0)}}
+.kicker{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--track-d);margin:22px 0 10px}
+h1{font-family:var(--disp);font-weight:900;font-size:clamp(34px,5.4vw,62px);line-height:1.04;letter-spacing:-.01em}
+h1 .accent{color:var(--track)}
+h1 .thin{display:block;font-weight:700;font-size:.42em;letter-spacing:.06em;color:var(--ink2);margin-top:14px;text-transform:uppercase}
+.hero-meta{display:flex;flex-wrap:wrap;gap:10px;margin:26px 0}
+.chip{display:inline-flex;align-items:center;gap:7px;background:#fff;border:1.5px solid var(--line);border-radius:999px;padding:8px 15px;font-size:13px;font-weight:600;color:var(--ink2)}
+.chip b{font-family:var(--mono);color:var(--ink)}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--body);font-weight:800;font-size:14.5px;padding:13px 22px;border-radius:12px;border:2px solid var(--ink);background:#fff;color:var(--ink);cursor:pointer;text-decoration:none;transition:transform .18s,box-shadow .18s;box-shadow:0 3px 0 var(--ink)}
+.btn:hover{transform:translateY(-2px);box-shadow:0 5px 0 var(--ink)}
+.btn:active{transform:translateY(1px);box-shadow:0 1px 0 var(--ink)}
+.btn.primary{background:var(--track);border-color:var(--track-d);color:#fff;box-shadow:0 3px 0 var(--track-d)}
+.btn.primary:hover{box-shadow:0 5px 0 var(--track-d)}
+.btn.dark{background:var(--ink);color:#fff}
+.btn.small{padding:9px 15px;font-size:13px;border-radius:10px}
+
+/* schedule card */
+.sched{background:var(--ink);color:#fff;border-radius:18px;padding:26px 26px 22px;box-shadow:0 18px 40px -18px rgba(16,29,44,.45);position:relative;overflow:hidden}
+.sched::after{content:"";position:absolute;right:-40px;top:-40px;width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,rgba(232,69,43,.35),transparent 70%)}
+.sched h3{font-family:var(--disp);font-size:16px;font-weight:700;display:flex;justify-content:space-between;align-items:center}
+.sched h3 span{font-family:var(--mono);font-size:12px;color:var(--sun);font-weight:700}
+.sched ol{list-style:none;margin-top:18px}
+.sched li{display:grid;grid-template-columns:30px 1fr auto;gap:12px;align-items:center;padding:11px 6px;border-top:1px dashed rgba(255,255,255,.16);transition:transform .2s,background .2s;border-radius:8px;cursor:default}
+.sched li:hover{transform:translateX(6px);background:rgba(255,255,255,.05)}
+.sched li i{font-style:normal;width:26px;height:26px;border-radius:7px;display:grid;place-items:center;font-family:var(--mono);font-size:11px;font-weight:800;background:var(--c,var(--track));color:#fff}
+.sched li span{font-weight:600;font-size:14.5px}
+.sched li em{font-style:normal;font-family:var(--mono);font-size:12px;color:#9FB2C6}
+.sched-total{margin-top:16px;padding-top:14px;border-top:2px solid rgba(255,255,255,.2);display:flex;justify-content:space-between;font-family:var(--mono);font-size:13px;color:var(--sun);font-weight:700}
+
+/* lanes */
+.lanes{position:relative;height:118px;margin-top:52px;overflow:hidden;background:
+ repeating-linear-gradient(180deg,#E8452B 0 12px,#fff 12px 15px);border-top:4px solid #fff;border-bottom:4px solid #fff}
+.lanes-nums{position:absolute;inset:0;display:flex;justify-content:space-around;align-items:center;font-family:var(--disp);font-weight:900;font-size:clamp(34px,6vw,64px);color:rgba(255,255,255,.5)}
+.runner{position:absolute;top:14px;font-size:46px;transform:scaleX(-1);animation:runX 13s linear infinite;filter:drop-shadow(0 4px 4px rgba(0,0,0,.3))}
+@keyframes runX{from{left:-7%}to{left:103%}}
+
+/* ---------- generic sections ---------- */
+.band{background:var(--band);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.wrap{max-width:1200px;margin:0 auto;padding:70px 20px}
+.sec-head{display:flex;gap:22px;align-items:flex-end;margin-bottom:34px;flex-wrap:wrap}
+.sec-num{font-family:var(--disp);font-weight:900;font-size:30px;color:#fff;background:var(--c,var(--track));padding:10px 16px;border-radius:12px;box-shadow:0 4px 0 rgba(16,29,44,.25);line-height:1;flex:none}
+.sec-head h2{font-family:var(--disp);font-weight:900;font-size:clamp(24px,3.6vw,38px);line-height:1.1}
+.sec-head .lead{width:100%;max-width:760px;color:var(--ink2);font-size:15.5px}
+.sec-tag{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--track-d);font-weight:700;display:block;margin-bottom:6px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:24px;transition:transform .25s,box-shadow .25s}
+.card.lift:hover{transform:translateY(-4px);box-shadow:0 16px 34px -20px rgba(16,29,44,.35)}
+.card h4{font-family:var(--disp);font-size:15px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:9px}
+ul.check{list-style:none}
+ul.check li{position:relative;padding:6px 0 6px 26px;font-size:14.5px;color:var(--ink2)}
+ul.check li::before{content:"▸";position:absolute;left:4px;color:var(--track);font-weight:900}
+ul.check.ok li::before{content:"✓";color:var(--field)}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.note{display:flex;gap:12px;background:#FFF6E3;border:1.5px dashed var(--sun-d);border-radius:12px;padding:14px 16px;font-size:14px;color:#7A5410}
+.note b{color:#5E3F07}
+
+/* ---------- warmup ---------- */
+.warm-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:24px;align-items:start}
+.video-frame{position:relative;border-radius:14px;overflow:hidden;background:#000;aspect-ratio:16/9;box-shadow:0 14px 34px -18px rgba(16,29,44,.5)}
+.video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.video-links{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.pill-link{display:inline-flex;gap:7px;align-items:center;font-size:13px;font-weight:700;text-decoration:none;color:var(--track-d);background:#fff;border:1.5px solid var(--track);border-radius:999px;padding:8px 15px;transition:.2s}
+.pill-link:hover{background:var(--track);color:#fff}
+/* drill player */
+.drill{background:var(--ink);color:#fff;border-radius:18px;overflow:hidden}
+.drill-top{display:flex;justify-content:space-between;align-items:center;padding:16px 22px;border-bottom:1px solid rgba(255,255,255,.12)}
+.drill-top b{font-family:var(--disp);font-size:14px}
+.drill-top span{font-family:var(--mono);font-size:12px;color:var(--sun)}
+.d-time{font-family:var(--mono);font-weight:800;font-size:clamp(48px,6vw,66px);text-align:center;padding:18px 0 4px;letter-spacing:.02em;font-variant-numeric:tabular-nums}
+.d-name{text-align:center;font-weight:700;font-size:17px;min-height:52px;padding:0 20px;display:flex;align-items:center;justify-content:center}
+.d-bar{height:7px;background:rgba(255,255,255,.14);margin:16px 22px 6px;border-radius:99px;overflow:hidden}
+.d-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--sun),var(--track));transition:width .3s}
+.d-status{text-align:center;font-family:var(--mono);font-size:12px;color:#9FB2C6;min-height:22px}
+.d-ctrl{display:flex;gap:10px;justify-content:center;padding:14px 0 20px;flex-wrap:wrap}
+.d-btn{font-family:var(--body);font-weight:800;font-size:13.5px;padding:11px 20px;border-radius:10px;border:none;cursor:pointer;background:var(--track);color:#fff;transition:.2s;box-shadow:0 3px 0 var(--track-d)}
+.d-btn:hover{transform:translateY(-2px)}
+.d-btn.ghost{background:rgba(255,255,255,.1);box-shadow:0 3px 0 rgba(255,255,255,.15)}
+.steps{list-style:none;margin-top:22px;background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.steps li{display:grid;grid-template-columns:44px 1fr auto;gap:12px;align-items:center;padding:12px 16px;border-top:1px solid var(--line);cursor:pointer;transition:.2s;font-size:14px}
+.steps li:first-child{border-top:0}
+.steps li:hover{background:#F4F8FB}
+.steps li i{font-style:normal;width:30px;height:30px;border-radius:8px;display:grid;place-items:center;background:#EDF2F7;font-family:var(--mono);font-size:12px;font-weight:800;color:var(--ink2)}
+.steps li em{font-style:normal;font-family:var(--mono);font-size:12px;color:var(--muted);font-weight:700}
+.steps li.active{background:var(--track);color:#fff}
+.steps li.active i{background:rgba(255,255,255,.2);color:#fff}
+.steps li.active em{color:#FFD9CF}
+.steps li.done{opacity:.45}
+.steps li.done i{background:var(--field);color:#fff}
+
+/* ---------- 100m ---------- */
+.phases{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:26px}
+.phase{position:relative;background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px 18px 18px;overflow:hidden;transition:.25s}
+.phase:hover{transform:translateY(-5px);box-shadow:0 16px 32px -20px rgba(16,29,44,.4);border-color:var(--track)}
+.phase::before{content:attr(data-n);position:absolute;right:-6px;top:-16px;font-family:var(--disp);font-weight:900;font-size:74px;color:rgba(232,69,43,.09);line-height:1}
+.phase b{display:block;font-family:var(--disp);font-size:14px;margin-bottom:4px}
+.phase small{font-family:var(--mono);font-size:11px;color:var(--track-d);font-weight:700;letter-spacing:.08em}
+.phase p{font-size:13.5px;color:var(--ink2);margin-top:10px}
+.run-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+.tabs{display:inline-flex;background:#EDF2F7;border-radius:999px;padding:4px;margin-bottom:16px}
+.tabs button{border:none;background:transparent;font-family:var(--body);font-weight:800;font-size:13.5px;padding:9px 22px;border-radius:999px;cursor:pointer;color:var(--ink2);transition:.2s}
+.tabs button.on{background:var(--ink);color:#fff;box-shadow:0 3px 8px rgba(16,29,44,.25)}
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+table.stand{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:13px;min-width:560px;background:#fff}
+.stand th,.stand td{border:1px solid var(--line);padding:9px 6px;text-align:center}
+.stand thead th{background:var(--ink);color:#fff;font-size:12px}
+.stand thead th:first-child{background:#fff;color:var(--ink)}
+.stand tbody th{background:#F4F8FB;text-align:left;padding-left:12px;font-family:var(--body);font-size:13px}
+.stand td.hit{background:var(--field);color:#fff;font-weight:800;box-shadow:inset 0 0 0 2px #fff}
+.stand-note{font-size:12px;color:var(--muted);margin-top:8px}
+/* stopwatch */
+.stopwatch{background:var(--ink);color:#fff;border-radius:18px;padding:26px;text-align:center;position:relative;overflow:hidden}
+.stopwatch::before{content:"⏱";position:absolute;right:-16px;bottom:-24px;font-size:130px;opacity:.08}
+.sw-gender{display:flex;gap:8px;justify-content:center;margin-bottom:14px}
+.sw-gender button{font-family:var(--body);font-weight:800;font-size:13px;padding:8px 18px;border-radius:999px;border:1.5px solid rgba(255,255,255,.3);background:transparent;color:#C9D6E2;cursor:pointer;transition:.2s}
+.sw-gender button.on{background:var(--track);border-color:var(--track);color:#fff}
+.sw-time{font-family:var(--mono);font-weight:800;font-size:clamp(52px,7vw,74px);letter-spacing:.01em;font-variant-numeric:tabular-nums;line-height:1.1}
+.sw-label{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:#8FA3B8;margin-bottom:6px}
+.sw-ctrl{display:flex;gap:10px;justify-content:center;margin:18px 0 8px;flex-wrap:wrap}
+.sw-res{min-height:74px;display:flex;align-items:center;justify-content:center}
+.sw-badge{background:#fff;color:var(--ink);border-radius:12px;padding:12px 20px;font-size:14px;animation:pop .35s cubic-bezier(.3,1.6,.5,1)}
+.sw-badge b{font-family:var(--disp);color:var(--field-d);font-size:20px}
+@keyframes pop{from{transform:scale(.6);opacity:0}}
+
+/* pulse table */
+.pulse-t{margin-top:24px}
+.pulse-t table{width:100%;border-collapse:collapse;font-size:13.5px;background:#fff;min-width:0}
+.pulse-t th,.pulse-t td{border:1px solid var(--line);padding:9px 10px;text-align:center;font-family:var(--mono)}
+.pulse-t th{background:#F4F8FB;font-family:var(--body)}
+.pulse-t td.edit{color:var(--muted);font-style:italic;font-family:var(--body);font-size:12.5px}
+
+/* ---------- throwing / simulator ---------- */
+.frames{display:flex;gap:14px;overflow-x:auto;padding:6px 2px 16px;scroll-snap-type:x mandatory}
+.frames::-webkit-scrollbar{height:8px}
+.frames::-webkit-scrollbar-thumb{background:var(--line);border-radius:99px}
+.frame{flex:0 0 210px;scroll-snap-align:start;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;transition:.25s}
+.frame:hover{transform:translateY(-5px) rotate(-1deg);box-shadow:0 14px 28px -18px rgba(16,29,44,.4)}
+.frame .f-img{height:88px;display:grid;place-items:center;font-size:44px;background:repeating-linear-gradient(-45deg,#FFF3E9 0 14px,#FFE8DA 14px 28px)}
+.frame .f-body{padding:13px 14px 15px}
+.frame .f-body b{font-family:var(--mono);font-size:11px;color:var(--track-d);letter-spacing:.1em}
+.frame .f-body p{font-size:13px;color:var(--ink2);margin-top:4px;line-height:1.45}
+.sim{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px;margin-top:8px}
+.sim-screen{background:linear-gradient(180deg,#DFF0FF 0%,#EEF7FF 62%,#D9F2E4 62.2%,#C9EBD7 100%);border-radius:12px;border:1px solid var(--line);overflow:hidden}
+.sim-screen svg{display:block;width:100%;height:auto}
+.sim-ctrl{display:grid;grid-template-columns:1fr 1fr auto;gap:18px;align-items:end;margin-top:20px}
+.sim-field label{font-family:var(--mono);font-size:11.5px;font-weight:700;letter-spacing:.1em;color:var(--ink2);display:flex;justify-content:space-between}
+.sim-field label output{color:var(--track-d);font-size:13px}
+input[type=range]{width:100%;accent-color:var(--track);height:26px;cursor:pointer}
+.sim-out{display:flex;gap:20px;flex-wrap:wrap;margin-top:18px;align-items:center}
+.sim-stat{background:#F4F8FB;border-radius:12px;padding:10px 18px}
+.sim-stat b{font-family:var(--mono);font-size:22px;color:var(--track-d);display:block;line-height:1.2}
+.sim-stat span{font-size:11.5px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.08em}
+.sim-hint{font-size:13.5px;font-weight:700;color:var(--field-d)}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:26px}
+.card.bad{border-left:4px solid var(--track)}
+.card.good{border-left:4px solid var(--field)}
+.safety-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.safety-chip{display:inline-flex;gap:8px;align-items:center;background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:10px 15px;font-size:13px;font-weight:600;color:var(--ink2);transition:.2s}
+.safety-chip:hover{border-color:var(--track);transform:translateY(-2px)}
+
+/* ---------- game board ---------- */
+.game-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:24px;align-items:start}
+.court-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px}
+.court{position:relative;width:100%;aspect-ratio:9/5.4;border-radius:12px;overflow:hidden;touch-action:none;user-select:none}
+.court svg{position:absolute;inset:0;width:100%;height:100%}
+.p-chip{position:absolute;width:38px;height:38px;transform:translate(-50%,-50%);border-radius:50%;background:var(--track);border:3px solid #fff;color:#fff;font-family:var(--mono);font-weight:800;font-size:14px;display:grid;place-items:center;cursor:grab;box-shadow:0 5px 12px rgba(16,29,44,.35);transition:box-shadow .2s}
+.p-chip.setter{background:var(--sky)}
+.p-chip:hover,.p-chip.drag{box-shadow:0 0 0 6px rgba(255,185,46,.45),0 6px 14px rgba(16,29,44,.4);z-index:5}
+.p-chip.drag{cursor:grabbing}
+.board-btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.legend{display:flex;gap:16px;font-size:12.5px;color:var(--muted);margin-top:12px;flex-wrap:wrap}
+.legend i{font-style:normal;display:inline-block;width:13px;height:13px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+
+/* ---------- cool-down ---------- */
+.cool-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+.breath{background:linear-gradient(160deg,#0E3B2E,#145742);color:#fff;border-radius:18px;padding:30px;text-align:center;overflow:hidden}
+.breath-circle{width:130px;height:130px;margin:18px auto;border-radius:50%;background:radial-gradient(circle at 35% 30%,#7FE0B4,#149A5B);display:grid;place-items:center;font-family:var(--mono);font-weight:800;font-size:15px;box-shadow:0 0 0 12px rgba(127,224,180,.15),0 0 0 26px rgba(127,224,180,.07);transition:transform 1.4s ease}
+.breath-circle.b4{transform:scale(1.22)}
+.breath-circle.b7{transform:scale(1.1)}
+.breath-circle.b8{transform:scale(.88)}
+.breath small{color:#BFEAD6;font-size:13px}
+.cool-list{margin-top:22px}
+.cool-item{display:grid;grid-template-columns:52px 1fr auto;gap:14px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:12px;padding:13px 16px;margin-bottom:10px;transition:.2s}
+.cool-item:hover{transform:translateX(5px);border-color:var(--field)}
+.cool-item i{font-style:normal;width:44px;height:44px;border-radius:11px;background:#E7F6EE;color:var(--field-d);display:grid;place-items:center;font-size:21px}
+.cool-item b{font-size:14.5px;display:block}
+.cool-item p{font-size:12.5px;color:var(--muted)}
+.cool-item em{font-style:normal;font-family:var(--mono);font-size:12px;font-weight:800;color:var(--field-d);background:#E7F6EE;padding:6px 10px;border-radius:8px}
+
+/* ---------- quiz ---------- */
+.quiz-top{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:26px}
+.quiz-count{font-family:var(--mono);font-size:13px;font-weight:800;background:var(--ink);color:#fff;border-radius:999px;padding:9px 18px}
+.quiz-list{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.q-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px;transition:.25s}
+.q-card:hover{box-shadow:0 12px 26px -20px rgba(16,29,44,.4)}
+.q-card h5{font-size:15px;font-weight:800;margin-bottom:14px;display:flex;gap:10px}
+.q-card h5 span{font-family:var(--mono);color:var(--track-d);font-size:13px;flex:none}
+.opt{display:flex;gap:10px;align-items:center;padding:10px 13px;border:2px solid var(--line);border-radius:10px;cursor:pointer;font-size:13.5px;margin-bottom:8px;transition:.18s;font-weight:500}
+.opt:hover{border-color:var(--sky)}
+.opt input{accent-color:var(--sky)}
+.opt.sel{border-color:var(--sky);background:#EDF5FD;font-weight:700}
+.opt.ok{border-color:var(--field);background:#E7F6EE;font-weight:800}
+.opt.bad{border-color:var(--track);background:#FDECEA}
+.q-expl{display:none;font-size:12.5px;color:var(--ink2);background:#FFF9E8;border-left:3px solid var(--sun);padding:9px 12px;border-radius:0 8px 8px 0;margin-top:8px}
+.q-expl.show{display:block;animation:pop .3s}
+.quiz-result{margin-top:26px;display:none;background:var(--ink);color:#fff;border-radius:18px;padding:30px;text-align:center}
+.quiz-result.show{display:block;animation:pop .4s}
+.quiz-result .big{font-family:var(--disp);font-weight:900;font-size:52px;color:var(--sun)}
+.quiz-result p{color:#C9D6E2;margin-top:6px}
+
+/* ---------- homework ---------- */
+.hw-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:24px;align-items:start}
+.must{display:inline-flex;align-items:center;gap:8px;background:var(--track);color:#fff;font-family:var(--mono);font-size:11px;font-weight:800;letter-spacing:.14em;border-radius:6px;padding:6px 12px;margin-bottom:14px}
+.theme-choose{display:grid;gap:10px;margin:16px 0}
+.theme-opt{display:flex;gap:12px;align-items:center;border:2px solid var(--line);border-radius:12px;padding:12px 15px;cursor:pointer;font-size:14px;font-weight:600;transition:.2s;background:#fff}
+.theme-opt:hover{border-color:var(--sun)}
+.theme-opt input{accent-color:var(--track);transform:scale(1.2)}
+.theme-opt:has(input:checked){border-color:var(--track);background:#FFF4F0}
+.tools{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.tool{font-family:var(--mono);font-size:12px;font-weight:700;background:#EDF2F7;border-radius:8px;padding:7px 13px;color:var(--ink2)}
+.check-hw{margin-top:18px}
+.check-hw label{display:flex;gap:11px;align-items:flex-start;padding:10px 12px;border-radius:10px;cursor:pointer;font-size:14px;transition:.2s;border:1.5px solid transparent}
+.check-hw label:hover{background:#FFF9E8}
+.check-hw input{margin-top:3px;accent-color:var(--field);transform:scale(1.15)}
+.check-hw label.done{color:var(--muted);text-decoration:line-through}
+.hw-progress{height:9px;background:#EDF2F7;border-radius:99px;overflow:hidden;margin-top:14px}
+.hw-progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--sun),var(--field));transition:width .4s}
+/* infographic mock */
+.mock{aspect-ratio:210/297;background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:14px;display:grid;grid-template-rows:auto repeat(3,1fr) auto auto;gap:9px;box-shadow:0 20px 44px -24px rgba(16,29,44,.35);transition:transform .3s}
+.mock:hover{transform:rotate(-1.5deg) translateY(-6px)}
+.mock div{border-radius:7px;display:grid;place-items:center;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.05em}
+.m-t{background:var(--track);color:#fff;font-family:var(--disp)!important;font-size:12px!important}
+.m-s1{background:#FFF3E9;color:var(--track-d)}
+.m-s2{background:#E7F6EE;color:var(--field-d)}
+.m-s3{background:#EDF5FD;color:var(--sky-d)}
+.m-warn{background:repeating-linear-gradient(-45deg,#FFF6E3 0 10px,#FFEBC2 10px 20px);color:#7A5410}
+.m-src{background:#EDF2F7;color:var(--muted);font-size:8.5px!important}
+.criteria{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:14px}
+.criteria td,.criteria th{border:1px solid var(--line);padding:9px 12px;background:#fff}
+.criteria th{background:var(--ink);color:#fff;font-family:var(--mono);font-size:12px}
+.criteria td:last-child{font-family:var(--mono);font-weight:800;text-align:center;color:var(--track-d)}
+
+/* ---------- reflection ---------- */
+.reflect{background:#fff;border:1px solid var(--line);border-radius:18px;padding:28px;margin-top:26px}
+.emo-row{display:flex;gap:12px;flex-wrap:wrap;margin:16px 0 20px}
+.emo{width:64px;height:64px;border-radius:14px;border:2px solid var(--line);background:#F8FAFC;font-size:29px;cursor:pointer;transition:.2s;display:grid;place-items:center}
+.emo:hover{transform:translateY(-5px) scale(1.06);border-color:var(--sun)}
+.emo.picked{border-color:var(--track);background:#FFF4F0;box-shadow:0 4px 0 var(--track)}
+.vote-bars{display:grid;gap:8px}
+.vbar{display:grid;grid-template-columns:34px 1fr 40px;gap:10px;align-items:center;font-size:18px}
+.vbar .track{height:12px;background:#EDF2F7;border-radius:99px;overflow:hidden}
+.vbar .track i{display:block;height:100%;width:0;background:var(--track);transition:width .5s cubic-bezier(.2,.8,.2,1)}
+.vbar em{font-style:normal;font-family:var(--mono);font-size:12px;color:var(--muted);font-weight:800;text-align:right}
+.q-form{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+.q-form textarea{flex:1;min-width:240px;font-family:var(--body);font-size:14px;border:2px solid var(--line);border-radius:12px;padding:12px 14px;resize:vertical;min-height:48px}
+.q-form textarea:focus{outline:none;border-color:var(--sky)}
+
+/* ---------- footer ---------- */
+footer{background:var(--ink);color:#C9D6E2;margin-top:40px}
+.foot-in{max-width:1200px;margin:0 auto;padding:48px 20px 30px;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:34px}
+footer h5{font-family:var(--disp);color:#fff;font-size:14px;margin-bottom:14px}
+footer a{color:#9FB2C6;text-decoration:none;display:block;padding:4px 0;font-size:13.5px;transition:.2s}
+footer a:hover{color:var(--sun);transform:translateX(4px)}
+.foot-brand{font-family:var(--disp);font-weight:900;font-size:20px;color:#fff}
+.foot-brand span{color:var(--track)}
+footer small{display:block;margin-top:14px;font-size:12px;color:#7A8CA0}
+.foot-bottom{border-top:1px solid rgba(255,255,255,.12);text-align:center;padding:16px;font-family:var(--mono);font-size:11.5px;color:#7A8CA0;letter-spacing:.08em}
+
+/* toast */
+#toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,80px);background:var(--ink);color:#fff;padding:13px 24px;border-radius:12px;font-weight:700;font-size:14px;z-index:400;transition:transform .35s cubic-bezier(.2,1.4,.4,1);box-shadow:0 12px 30px rgba(16,29,44,.4);max-width:90vw;text-align:center}
+#toast.show{transform:translate(-50%,0)}
+
+@media(max-width:980px){
+  .hero-grid,.warm-grid,.run-grid,.game-grid,.cool-grid,.quiz-list,.hw-grid,.two-col{grid-template-columns:1fr}
+  .phases{grid-template-columns:1fr 1fr}
+  .grid-3{grid-template-columns:1fr}
+  .hero::before{display:none}
+  .sim-ctrl{grid-template-columns:1fr}
+  .foot-in{grid-template-columns:1fr;gap:24px}
+}
+@media(max-width:560px){.phases{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- scroll progress -->
+<div class="progress"><div class="progress-fill" id="pFill"></div><div class="progress-run" id="pRun" style="left:0%">🏃</div></div>
+
+<!-- header -->
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="#top">
+      <span class="brand-badge">ФК</span>
+      <span><b>Фізична культура</b><small>Медичний коледж · 3 курс</small></span>
+    </a>
+    <nav class="nav" id="nav">
+      <a href="#org">Організація</a>
+      <a href="#rozminka">Розминка</a>
+      <a href="#kontrol">100 м</a>
+      <a href="#metannya">Метання</a>
+      <a href="#gra">Гра</a>
+      <a href="#zamynka">Заминка</a>
+      <a href="#testy">Тести</a>
+      <a href="#doma">Домашнє</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ticker -->
+<div class="ticker"><div class="ticker-track" id="ticker">
+  <span><i>01</i> РОЗМИНКА · 10 ХВ</span><span><i>02</i> КОНТРОЛЬНА 100 М</span><span><i>03</i> МЕТАННЯ М'ЯЧА</span><span><i>04</i> СПОРТИВНА ГРА · ВОЛЕЙБОЛ</span><span><i>05</i> ЗАМИНКА + ПУЛЬС</span><span><i>06</i> ТЕСТ · 7 ПИТАНЬ</span><span><i>07</i> Д/З: ІНФОГРАФІКА ⚠️ ОБОВ'ЯЗКОВО</span>
+</div></div>
+
+<!-- HERO -->
+<section id="top">
+<div class="hero">
+  <div class="hero-grid">
+    <div data-reveal>
+      <span class="live"><span class="dot"></span> ОНЛАЙН-ЗАНЯТТЯ · ТРАНСЛЯЦЯ АКТИВНА</span>
+      <p class="kicker">Легка атлетика + спортивні ігри</p>
+      <h1>Контрольна <span class="accent">100&nbsp;метрів</span>
+        <span class="thin">+ удосконалення техніки метання м'яча + волейбол</span>
+      </h1>
+      <div class="hero-meta">
+        <span class="chip">🎓 <b>3 курс</b> медколедж</span>
+        <span class="chip">📅 <b>вівторок, 27.10.2026</b></span>
+        <span class="chip">⏱ тривалість <b>80 хв</b></span>
+        <span class="chip">🎥 формат: <b>відеозв'язок</b></span>
+      </div>
+      <div class="hero-cta">
+        <a class="btn primary" href="#rozminka">▶ Почати розминку</a>
+        <a class="btn" href="#testy">Одразу до тестів</a>
+      </div>
+    </div>
+
+    <aside class="sched" data-reveal style="transition-delay:.15s">
+      <h3>План заняття <span>80 ХВИЛИН</span></h3>
+      <ol>
+        <li><i style="--c:var(--track)">01</i><span>Розминка (відео-комплекс)</span><em>10 хв</em></li>
+        <li><i style="--c:var(--sky)">02</i><span>Контрольний біг 100 м</span><em>20 хв</em></li>
+        <li><i style="--c:var(--field)">03</i><span>Техніка метання м'яча</span><em>20 хв</em></li>
+        <li><i style="--c:var(--sun)">04</i><span>Спортивна гра: волейбол</span><em>20 хв</em></li>
+        <li><i style="--c:var(--track-d)">05</i><span>Заминка + контроль пульсу</span><em>5 хв</em></li>
+        <li><i style="--c:var(--ink2)">06</i><span>Тести, рефлексія, д/з</span><em>5 хв</em></li>
+      </ol>
+      <div class="sched-total"><span>РАЗОМ</span><span>Σ = 80:00</span></div>
+    </aside>
+  </div>
+
+  <div class="lanes" data-reveal>
+    <div class="lanes-nums"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span></div>
+    <div class="runner">🏃‍♂️</div>
+  </div>
+</div>
+</section>
+
+<!-- 01 ORG -->
+<section id="org">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <span class="sec-num" style="--c:var(--ink2)">01</span>
+      <div><span class="sec-tag">Перед стартом</span><h2>Організація заняття</h2></div>
+      <p class="lead">Заняття проходить онлайн: теоретичні блоки й техніка — у відеокімнаті, контрольний біг виконуєш самостійно на вулиці з відеофіксацією результату.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card lift" data-reveal>
+        <h4>🎯 Мета заняття</h4>
+        <ul class="check">
+          <li>Скласти контрольний біг на 100 м та отримати оцінку за 12-бальною шкалою</li>
+          <li>Закріпити фазову структуру метання м'яча на дальність</li>
+          <li>Розвинути координацію у волейбольних естафетах</li>
+        </ul>
+      </div>
+      <div class="card lift" data-reveal style="transition-delay:.1s">
+        <h4>🎒 Інвентар і форма</h4>
+        <ul class="check">
+          <li>Спортивна форма та кросівки</li>
+          <li>М'яч 150 г (або тенісний як заміна)</li>
+          <li>Телефон: секундомір + камера</li>
+          <li>Килимок для заминки, вода 0,5–1 л</li>
+        </ul>
+      </div>
+      <div class="card lift" data-reveal style="transition-delay:.2s">
+        <h4>💻 Правила онлайн</h4>
+        <ul class="check">
+          <li>Камера увімкнена протягом усього заняття</li>
+          <li>Безпечна зона для вправ: мінімум 2×2 м</li>
+          <li>При поганому самопочутті — одразу напиши викладачу</li>
+        </ul>
+      </div>
+    </div>
+    <div class="note" style="margin-top:22px" data-reveal>
+      <span style="font-size:22px">📹</span>
+      <div><b>Як здається контрольна 100 м онлайн:</b> попроси когось записати твій забіг на телефон (видео старту та фінішу), час фіксується секундоміром. Відео + скрін часу надсилаєш у чат групи до кінця дня.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 WARMUP -->
+<section id="rozminka" class="band">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <span class="sec-num" style="--c:var(--track)">02</span>
+      <div><span class="sec-tag">Етап 1 · 10 хвилин</span><h2>Розминка</h2></div>
+      <p class="lead">Повторюй комплекс за відео або за інтерактивним плеєром праворуч — він сам відраховує час кожної вправи і подає звуковий сигнал. Без розминки до контрольної не допускаємо!</p>
+    </div>
+    <div class="warm-grid">
+      <div class="card" style="padding:18px" data-reveal>
+        <div class="video-frame">
+          <iframe src="https://www.youtube.com/embed/sTxC3J3gQEU" title="Розминка — відео-комплекс" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="video-links">
+          <a class="pill-link" href="https://www.youtube.com/watch?v=sTxC3J3gQEU" target="_blank" rel="noopener">▶ Відкрити на YouTube</a>
+          <a class="pill-link" href="https://www.youtube.com/results?search_query=розминка+для+початку+уроку+фізичної+культури" target="_blank" rel="noopener">🔎 Альтернативні комплекси</a>
+        </div>
+        <p style="font-size:13.5px;color:var(--ink2);margin-top:12px">Якщо відео недоступне — обери будь-який комплекс «розминка перед бігом» на YouTube (8–10 хв) і виконай його повністю. Темп помірний, дихання рівне.</p>
+      </div>
+
+      <div data-reveal style="transition-delay:.12s">
+        <div class="drill" id="drillWarm">
+          <div class="drill-top"><b>🔥 ПЛЕЄР РОЗМИНКИ</b><span id="dwIdx">ВПРАВА 1/10</span></div>
+          <div class="d-time" id="dwTime">00:40</div>
+          <div class="d-name" id="dwName">Ходьба на місці з роботою рук</div>
+          <div class="d-bar"><i id="dwBar"></i></div>
+          <div class="d-status" id="dwStatus">Натисни «Старт» і повторюй за інструктором</div>
+          <div class="d-ctrl">
+            <button class="d-btn" id="dwMain">▶ Старт</button>
+            <button class="d-btn ghost" id="dwNext">Наступна ⏭</button>
+            <button class="d-btn ghost" id="dwReset">⟲ Спочатку</button>
+          </div>
+        </div>
+        <ol class="steps" id="dwList"></ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 100M -->
+<section id="kontrol">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <span class="sec-num" style="--c:var(--sky)">03</span>
+      <div><span class="sec-tag">Етап 2 · 20 хвилин</span><h2>Контрольна вправа: біг 100 м</h2></div>
+      <p class="lead">Чотири фази спринту. Переглянь техніку, потім виконай один заліковий забіг і зафіксуй час у віртуальному секундомірі нижче.</p>
+    </div>
+
+    <div class="phases">
+      <div class="phase" data-n="А" data-reveal><small>0–15 М</small><b>Старт</b><p>Низький старт: нога, що попереду, за 1–1,5 стопи від лінії. Команди: «На старт!» → «Увага!» → «Рух!». Вага тіла перенесена на руки.</p></div>
+      <div class="phase" data-n="Б" data-reveal style="transition-delay:.08s"><small>15–40 М</small><b>Стартовий розгін</b><p>Короткі потужні кроки, корпус нахилений уперед, погляд у покриття. Поступове випрямлення тулуба до 30–40 м.</p></div>
+      <div class="phase" data-n="В" data-reveal style="transition-delay:.16s"><small>40–85 М</small><b>Біг по дистанції</b><p>Вільний, розслаблений біг. Руки зігнуті ~90°, плечі не піднімати. Стопа ставиться з передньої частини.</p></div>
+      <div class="phase" data-n="Г" data-reveal style="transition-delay:.24s"><small>85–100 М</small><b>Фінішування</b><p>Не знижувати швидкість! На лінії — нахил грудьми («кидок»). Після фінішу пробігти ще 10–15 м плавно.</p></div>
+    </div>
+
+    <div class="run-grid">
+      <div class="card" data-reveal>
+        <h4>📋 Орієнтовні нормативи (12-бальна шкала)</h4>
+        <div class="tabs" role="tablist">
+          <button class="on" data-g="m">Юнаки</button>
+          <button data-g="f">Дівчата</button>
+        </div>
+        <div class="tbl-wrap"><table class="stand" id="tblM"><thead><tr><th>Бал</th><th>12</th><th>11</th><th>10</th><th>9</th><th>8</th><th>7</th><th>6</th><th>5</th><th>4</th><th>3</th></tr></thead><tbody></tbody></table></div>
+        <div class="tbl-wrap" style="margin-top:10px;display:none"><table class="stand" id="tblF"><thead><tr><th>Бал</th><th>12</th><th>11</th><th>10</th><th>9</th><th>8</th><th>7</th><th>6</th><th>5</th><th>4</th><th>3</th></tr></thead><tbody></tbody></table></div>
+        <p class="stand-note">* Рекомендована шкала; викладач може коригувати межі з урахуванням стану здоров'я. комірка підсвітиться після твого результату.</p>
+        <div class="pulse-t">
+          <h4 style="margin-top:8px">🫀 Медичний самоконтроль: заповни свій пульс</h4>
+          <table>
+            <tr><th>Стан</th><th>У спокої</th><th>Одразу після фінішу</th><th>Через 3 хв</th></tr>
+            <tr><td style="font-family:var(--body);font-weight:700">ЧСС, уд/хв</td><td class="edit">запиши свій</td><td class="edit">запиши свій</td><td class="edit">запиши свій</td></tr>
+          </table>
+          <p class="stand-note">У нормі пульс повертається до вихідного за 5–7 хв. Якщо через 3 хв ЧСС &gt; 140 — повідом викладача.</p>
+        </div>
+      </div>
+
+      <div class="stopwatch" data-reveal style="transition-delay:.12s">
+        <div class="sw-label">ВІРТУАЛЬНИЙ СЕКУНДОМІР · ТРЕНУВАННЯ</div>
+        <div class="sw-gender">
+          <button class="on" data-g="m">Юнаки</button>
+          <button data-g="f">Дівчата</button>
+        </div>
+        <div class="sw-time" id="swTime">00:00.00</div>
+        <div class="sw-ctrl">
+          <button class="d-btn" id="swStart">🔫 На старт — руш!</button>
+          <button class="d-btn ghost" id="swStop" style="display:none">■ Фініш</button>
+          <button class="d-btn ghost" id="swReset">⟲ Скинути</button>
+        </div>
+        <div class="sw-res" id="swRes"></div>
+        <p style="font-size:12px;color:#8FA3B8;margin-top:8px">Порахуй свій реальний час за нормативом, а тут можеш потренувати реакцію на старт 😉</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 THROWING -->
+<section id="metannya" class="band">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <span class="sec-num" style="--c:var(--field)">04</span>
+      <div><span class="sec-tag">Етап 3 · 20 хвилин</span><h2>Удосконалення техніки метання м'яча</h2></div>
+      <p class="lead">М'яч 150 г, спосіб — з розбігу через голову. Гортай «кіноплівку» фаз, потім випробуй тренажер кута вильоту.</p>
+    </div>
+
+    <div class="frames" data-reveal>
+      <div class="frame"><div class="f-img">🖐️</div><div class="f-body"><b>КАДР 1 · ХВАТ</b><p>М'яч на пальцях, не в долоні. Лікоть на рівні плеча, кисть розслаблена.</p></div></div>
+      <div class="frame"><div class="f-img">🏃</div><div class="f-body"><b>КАДР 2 · РОЗБІГ</b><p>36–40 м із поступовим прискоренням. М'яч тримаємо над плечем.</p></div></div>
+      <div class="frame"><div class="f-img">🔀</div><div class="f-body"><b>КАДР 3 · КРОКИ</b><p>Приставні/схресні кроки боком, рука з м'ячем відводиться назад повністю.</p></div></div>
+      <div class="frame"><div class="f-img">🏹</div><div class="f-body"><b>КАДР 4 · НАТЯГ</b><p>«Лук»: таз попереду плечей, вага на задній нозі, корпус відхилений.</p></div></div>
+      <div class="frame"><div class="f-img">💥</div><div class="f-body"><b>КАДР 5 · ВИПУСК</b><p>Батокоподібний рух: таз → тулуб → плече → кисть. Кут ~40°.</p></div></div>
+      <div class="frame"><div class="f-img">🦵</div><div class="f-body"><b>КАДР 6 · ПРОХОД</b><p>Після випуску — перестрибування на передню ногу, утримати рівновагу.</p></div></div>
+    </div>
+
+    <div class="sim" data-reveal>
+      <h4>🧪 Тренажер: підбери кут і швидкість вильоту</h4>
+      <div class="sim-screen">
+        <svg id="simSvg" viewBox="0 0 1000 380" aria-label="Траєкторія польоту м'яча">
+          <g id="simTicks"></g>
+          <path id="simPath" fill="none" stroke="#2D7DD2" stroke-width="3" stroke-dasharray="8 7" stroke-linecap="round"/>
+          <circle id="simBall" r="9" fill="#FFB92E" stroke="#B87A00" stroke-width="2.5" cx="44" cy="312"/>
+          <text id="simDist" x="500" y="30" text-anchor="middle" font-family="JetBrains Mono,monospace" font-weight="800" font-size="22" fill="#101D2C"></text>
+        </svg>
+      </div>
+      <div class="sim-ctrl">
+        <div class="sim-field"><label>КУТ ВИЛЬОТУ <output id="angOut">40°</output></label><input type="range" id="ang" min="25" max="50" value="40" step="1"></div>
+        <div class="sim-field"><label>ШВИДКІСТЬ ВИЛЬОТУ <output id="spdOut">21 м/с</output></label><input type="range" id="spd" min="14" max="26" value="21" step="0.5"></div>
+        <button class="btn primary" id="throwBtn">🥎 Кинути!</button>
+      </div>
+      <div class="sim-out">
+        <div class="sim-stat"><b id="outD">—</b><span>дальність</span></div>
+        <div class="sim-stat"><b id="outT">—</b><span>час польоту</span></div>
+        <div class="sim-hint" id="simHint"></div>
+      </div>
+      <p style="font-size:12.5px;color:var(--muted);margin-top:12px">Модель: d ≈ v²·sin(2θ)/g з поправкою на висоту випуску 1,8 м. Оптимум для м'яча — 35–42°, саме так працює «батіг» у техніці.</p>
+    </div>
+
+    <div class="two-col">
+      <div class="card bad" data-reveal><h4>❌ Типові помилки</h4><ul class="check"><li>Кидок лише рукою, без участі тулуба й ніг</li><li>Занадто ранній або занадто високий випуск</li><li>Ноги на одній лінії в момент фінального зусилля</li><li>Заступ за лінію метання</li></ul></div>
+      <div class="card good" data-reveal style="transition-delay:.1s"><h4>✅ Правильно</h4><ul class="check ok"><li>Таз випереджає плечі — енергія йде «знизу вгору»</li><li>Батокоподібна послідовність ланок тіла</li><li>Кут вильоту ≈ 40°</li><li>Прохід за м'ячем і збереження рівноваги</li></ul></div>
+    </div>
+
+    <div class="safety-row" data-reveal>
+      <span class="safety-chip">🚨 Метання — лише за командою викладача</span>
+      <span class="safety-chip">🚫 Не стій у секторі метання</span>
+      <span class="safety-chip">📢 Збір м'ячів — тільки після сигналу</span>
+      <span class="safety-chip">📏 Дистанція між тими, хто метає ≥ 10 м</span>
+      <span class="safety-chip">👀 Перевір, що сектор порожній</span>
+    </div>
+  </div>
+</section>
+
+<!-- 05 GAME -->
+<section id="gra">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <span class="sec-num" style="--c:var(--sun)">05</span>
+      <div><span class="sec-tag">Етап 4 · 20 хвилин</span><h2>Спортивна гра: волейбол</h2></div>
+      <p class="lead">Завдання дня: нижня подача та прийом подачі. Онлайн — виконуємо в парах через камеру (серія подач у стіну/партнеру), на стадіоні — гра 4×4 на зменшеному майданчику до 15 очок.</p>
+    </div>
+    <div class="game-grid">
+      <div class="court-card" data-reveal>
+        <h4>🏐 Тактична дошка: розстав гравців</h4>
+        <div class="court" id="court">
+          <svg viewBox="0 0 900 540" preserveAspectRatio="none">
+            <rect width="900" height="540" fill="#2AA360"/>
+            <rect x="8" y="8" width="884" height="524" fill="none" stroke="#fff" stroke-width="5"/>
+            <line x1="450" y1="8" x2="450" y2="532" stroke="#fff" stroke-width="5" stroke-dasharray="16 12"/>
+            <line x1="300" y1="8" x2="300" y2="532" stroke="rgba(255,255,255,.7)" stroke-width="3"/>
+            <line x1="600" y1="8" x2="600" y2="532" stroke="rgba(255,255,255,.7)" stroke-width="3"/>
+            <text x="220" y="60" font-family="Unbounded" font-size="26" fill="rgba(255,255,255,.55)" font-weight="700">ТВІЙ БІК</text>
+            <text x="560" y="60" font-family="Unbounded" font-size="26" fill="rgba(255,255,255,.35)" font-weight="700">СУПЕРНИК</text>
+          </svg>
+          <!-- chips injected by JS -->
+        </div>
+        <div class="board-btns">
+          <button class="btn small" id="presetRec">Прийом подачі (3-1-2)</button>
+          <button class="btn small" id="presetAtk">Напад (4-2)</button>
+          <button class="btn small dark" id="presetReset">⟲ Розкидати</button>
+        </div>
+        <div class="legend"><span><i style="background:var(--track)"></i>гравці 1–5</span><span><i style="background:var(--sky)"></i>зв'язуючий (№6)</span><span>✋ перетягуй фішки пальцем або мишею</span></div>
+      </div>
+
+      <div>
+        <div class="card lift" data-reveal><h4>📌 Правила, які повторюємо</h4><ul class="check"><li>Максимум 3 торкання м'яча на боці команди</li><li>Один гравець не може торкнутися м'яча двічі поспіль</li><li>Перехід зон — за годинниковою стрілкою після виграшу подачі</li><li>М'яч «в ауті», якщо торкнувся підлоги за лініями</li></ul></div>
+        <div class="card lift" style="margin-top:18px;background:#FFF9E8;border-color:var(--sun)" data-reveal>
+          <h4>⚡ Естафета для онлайн-формату</h4>
+          <p style="font-size:14px;color:var(--ink2)">Кожен виконує на камеру: <b>20 нижніх подач</b> у стіну з відстані 3 м → <b>15 прийомів</b> зверху → <b>10 передач</b> над собою. Хто швидше без помилок — той і переміг 😉 Рахуємо чесно!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 COOL-DOWN -->
+<section id="zamynka" class="band">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <span class="sec-num" style="--c:var(--track-d)">06</span>
+      <div><span class="sec-tag">Етап 5 · 5 хвилин</span><h2>Заминка та відновлення</h2></div>
+      <p class="lead">Різко зупинятися після спринту небезпечно: кров «залишається» в ногах. Заминка плавно знижує пульс і прибирає напруження м'язів.</p>
+    </div>
+    <div class="cool-grid">
+      <div data-reveal>
+        <div class="drill" id="drillCool">
+          <div class="drill-top"><b>🧘 ПЛЕЄР ЗАМИНКИ</b><span id="dcIdx">ВПРАВА 1/5</span></div>
+          <div class="d-time" id="dcTime">01:00</div>
+          <div class="d-name" id="dcName">Повільна ходьба, дихання 4-7-8</div>
+          <div class="d-bar"><i id="dcBar"></i></div>
+          <div class="d-status" id="dcStatus">Відновлюємо пульс спокійно і без поспіху</div>
+          <div class="d-ctrl">
+            <button class="d-btn" id="dcMain">▶ Старт</button>
+            <button class="d-btn ghost" id="dcNext">Наступна ⏭</button>
+            <button class="d-btn ghost" id="dcReset">⟲ Спочатку</button>
+          </div>
+        </div>
+        <div class="cool-list">
+          <div class="cool-item" data-reveal><i>🚶</i><div><b>Ходьба + дихання 4-7-8</b><p>Вдих на 4 кроки, затримка на 7, видих на 8</p></div><em>60 с</em></div>
+          <div class="cool-item" data-reveal style="transition-delay:.06s"><i>🦵</i><div><b>Розтяжка квадрицепса</b><p>Стоячи, п'ятку до сідниці, коліна разом</p></div><em>по 30 с</em></div>
+          <div class="cool-item" data-reveal style="transition-delay:.12s"><i>🙇</i><div><b>Нахил до прямих ніг</b><p>Спина рівна, тягнемось до носків без ривків</p></div><em>30 с</em></div>
+          <div class="cool-item" data-reveal style="transition-delay:.18s"><i>💪</i><div><b>Плечі та руки</b><p>Розтяжка через груди та за спину</p></div><em>30 с</em></div>
+          <div class="cool-item" data-reveal style="transition-delay:.24s"><i>🌬️</i><div><b>Струшування литок + глибокий видих</b><p>Фінальний контроль пульсу</p></div><em>30 с</em></div>
+        </div>
+      </div>
+
+      <div data-reveal style="transition-delay:.15s">
+        <div class="breath">
+          <h4 style="font-family:var(--disp);font-size:16px">Дихальна вправа 4-7-8</h4>
+          <small>коло підказує ритм: дихай разом із ним</small>
+          <div class="breath-circle" id="breathC"><span id="breathT">СТАРТ</span></div>
+          <button class="d-btn" id="breathBtn" style="background:var(--sun);color:#4A3200;box-shadow:0 3px 0 var(--sun-d)">▶ Почати 3 цикли</button>
+        </div>
+        <div class="card" style="margin-top:18px">
+          <h4>🧠 Навіщо це майбутньому медику</h4>
+          <ul class="check">
+            <li>Плавне зниження ЧСС захищає від запаморочення після фінішу</li>
+            <li>Стретчинг зменшує крепатуру на 24–48 год</li>
+            <li>Навичка самоконтролю пульсу — база клінічної практики</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 QUIZ -->
+<section id="testy">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <span class="sec-num" style="--c:var(--ink)">07</span>
+      <div><span class="sec-tag">Етап 6 · самоперевірка</span><h2>Тести: перевір, що засвоїв</h2></div>
+      <p class="lead">Обери відповідь у кожному питанні та натисни «Перевірити». Пояснення з'являться після перевірки.</p>
+    </div>
+    <div class="quiz-top" data-reveal>
+      <span class="quiz-count" id="quizCount">Відповідей: 0 / 7</span>
+      <button class="btn small primary" id="quizCheck" disabled style="opacity:.5">Перевірити результати</button>
+      <button class="btn small" id="quizReset" style="display:none">⟲ Пройти ще раз</button>
+    </div>
+    <div class="quiz-list" id="quizList" data-reveal></div>
+    <div class="quiz-result" id="quizRes">
+      <div class="big" id="qrScore">0/7</div>
+      <p id="qrText"></p>
+    </div>
+  </div>
+</section>
+
+<!-- 08 HOMEWORK -->
+<section id="doma" class="band">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <span class="sec-num" style="--c:var(--sun)">08</span>
+      <div><span class="sec-tag">Домашнє завдання</span><h2>Створи інфографіку</h2></div>
+      <p class="lead">Головне завдання тижня — перетворити техніку з сьогоднішнього заняття на зрозумілу візуальну інструкцію. Саме так найкраще запам'ятовується матеріал.</p>
+    </div>
+    <div class="hw-grid">
+      <div class="card" data-reveal>
+        <span class="must">⚠️ ОБОВ'ЯЗКОВО ДЛЯ ВСІХ</span>
+        <h4>1️⃣ Обери тему інфографіки</h4>
+        <div class="theme-choose">
+          <label class="theme-opt"><input type="radio" name="hwTheme" checked> 🏃 «Техніка бігу на 100 м: 4 фази спринту»</label>
+          <label class="theme-opt"><input type="radio" name="hwTheme"> 🥎 «Техніка метання м'яча: від хвату до випуску»</label>
+          <label class="theme-opt"><input type="radio" name="hwTheme"> 🫀 «Фізичні навантаження та серцево-синна система» (медичний акцент)</label>
+        </div>
+        <h4>2️⃣ Обов'язкові блоки інфографіки</h4>
+        <div class="check-hw" id="hwCheck">
+          <label><input type="checkbox"> Заголовок і підзаголовок із темою</label>
+          <label><input type="checkbox"> 3–5 кроків техніки з ілюстраціями/схемами</label>
+          <label><input type="checkbox"> Блок безпеки (мінімум 2 правила)</label>
+          <label><input type="checkbox"> 1–2 цікаві факти</label>
+          <label><input type="checkbox"> Список використаних джерел унизу</label>
+          <label><input type="checkbox"> Файл названо: <b>Група_Прізвище_інфографіка</b></label>
+        </div>
+        <div class="hw-progress"><i id="hwBar"></i></div>
+        <p style="font-size:12.5px;color:var(--muted);margin-top:6px" id="hwCount">Виконано: 0 із 6</p>
+
+        <h4 style="margin-top:22px">3️⃣ Інструменти на вибір</h4>
+        <div class="tools"><span class="tool">Canva</span><span class="tool">Figma</span><span class="tool">PowerPoint</span><span class="tool">Piktochart</span><span class="tool">Genially</span><span class="tool">навіть від руки + скан!</span></div>
+
+        <h4 style="margin-top:22px">4️⃣ Вимоги та дедлайн</h4>
+        <ul class="check">
+          <li>Формат: вертикальна картинка або PDF (А4), читабельна з екрана телефона</li>
+          <li>Шрифт основного тексту — не менше 16 умовних пунктів, контрастні кольори</li>
+          <li>Здати до <b>вівторка, 03.11.2026</b> у чат групи / Classroom</li>
+        </ul>
+
+        <h4 style="margin-top:22px">Критерії оцінювання (разом 12 балів)</h4>
+        <table class="criteria">
+          <tr><th>Критерій</th><th>Бали</th></tr>
+          <tr><td>Зміст: точність техніки, відсутність помилок</td><td>4</td></tr>
+          <tr><td>Дизайн: структура, читабельність, охайність</td><td>3</td></tr>
+          <tr><td>Джерела інформації вказані</td><td>2</td></tr>
+          <tr><td>Креативність та власний стиль</td><td>3</td></tr>
+        </table>
+      </div>
+
+      <div data-reveal style="transition-delay:.15s">
+        <p style="font-family:var(--mono);font-size:12px;font-weight:800;letter-spacing:.12em;color:var(--ink2);margin-bottom:12px">📐 ПРИКЛАД СТРУКТУРИ А4</p>
+        <div class="mock">
+          <div class="m-t">ТЕХНІКА БІГУ НА 100 М</div>
+          <div class="m-s1">КРОК 1 · СТАРТ 🏁</div>
+          <div class="m-s2">КРОК 2 · РОЗГІН 💨</div>
+          <div class="m-s3">КРОК 3 · ФІНІШ 🎽</div>
+          <div class="m-warn">⚠️ БЕЗПЕКА: ЗАВЖДИ РОЗМИНКА</div>
+          <div class="m-src">ДЖЕРЕЛА: ПІДРУЧНИК ФК · НОРМАТИВИ · ПОСИЛАННЯ</div>
+        </div>
+        <p style="font-size:13px;color:var(--muted);margin-top:12px">Це лише схема розташування блоків — дизайн повністю твій. Додай фото, іконки, власні малюнки.</p>
+        <div class="note" style="margin-top:16px">
+          <span style="font-size:20px">💡</span>
+          <div><b>Лайфхак:</b> зроби спершу текстовий чернетк на папері, а вже потім перенось у редактор — так у 2 рази швидше.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- reflection -->
+    <div class="reflect" data-reveal>
+      <h4 style="font-family:var(--disp);font-size:17px">📣 Рефлексія: як тобі заняття?</h4>
+      <div class="emo-row" id="emoRow">
+        <button class="emo" data-i="0">😤</button>
+        <button class="emo" data-i="1">💪</button>
+        <button class="emo" data-i="2">🙂</button>
+        <button class="emo" data-i="3">😴</button>
+        <button class="emo" data-i="4">🤯</button>
+      </div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:8px">«Втомлений, але пишаюсь» · «Саме те» · «Нормально» · «Ледве живий» · «Мозок кипить»</div>
+      <div class="vote-bars" id="voteBars"></div>
+      <div class="q-form">
+        <textarea id="qText" placeholder="Питання або коментар викладачу… (наприклад: «Не зрозумів фазу фінішування»)" rows="1"></textarea>
+        <button class="btn primary small" id="qSend">Надіслати 💬</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-in">
+    <div>
+      <div class="foot-brand">ФІЗКУЛЬТ <span>//</span> ОНЛАЙН</div>
+      <p style="font-size:13.5px;margin-top:12px;color:#9FB2C6">Кафедра фізичного виховання · Медичний коледж · 3 курс.<br>Заняття: легка атлетика та спортивні ігри.</p>
+      <small>Дата проведення: вівторок, 27 жовтня 2026 · Наступне заняття — через тиждень 🏃</small>
+    </div>
+    <div>
+      <h5>Навігація заняттям</h5>
+      <a href="#rozminka">Розминка з відео</a>
+      <a href="#kontrol">Контрольна 100 м</a>
+      <a href="#metannya">Метання м'яча</a>
+      <a href="#gra">Волейбол</a>
+      <a href="#zamynka">Заминка</a>
+    </div>
+    <div>
+      <h5>Що не забути</h5>
+      <a href="#testy">Пройти тест самоперевірки</a>
+      <a href="#doma">Зробити інфографіку (д/з)</a>
+      <a href="#org">Надіслати відео забігу</a>
+      <a href="#zamynka">Записати свій пульс</a>
+    </div>
+  </div>
+  <div class="foot-bottom">РУХ — ЦЕ ЖИТТЯ · ФІЗИЧНА КУЛЬТУРА · 2026</div>
+</footer>
+
+<div id="toast"></div>
+
+<script>
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+
+/* ---------- toast ---------- */
+let toastT;
+function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),2800);}
+
+/* ---------- sound ---------- */
+let AC=null;
+function beep(f=880,d=.09,type='sine',v=.18){try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();const o=AC.createOscillator(),g=AC.createGain();o.type=type;o.frequency.value=f;g.gain.value=v;o.connect(g);g.connect(AC.destination);o.start();g.gain.exponentialRampToValueAtTime(.001,AC.currentTime+d);o.stop(AC.currentTime+d);}catch(e){}}
+
+/* ---------- ticker duplicate ---------- */
+const tick=$('#ticker');tick.innerHTML+=tick.innerHTML;
+
+/* ---------- scroll progress ---------- */
+addEventListener('scroll',()=>{
+  const h=document.documentElement, p=h.scrollTop/(h.scrollHeight-h.clientHeight);
+  $('#pFill').style.width=(p*100)+'%';$('#pRun').style.left=(p*100)+'%';
+},{passive:true});
+
+/* ---------- reveal ---------- */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});
+$$('[data-reveal]').forEach(el=>io.observe(el));
+
+/* ---------- nav active ---------- */
+const secs=$$('section[id]'),links=$$('#nav a');
+const nio=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+e.target.id));}})},{rootMargin:'-40% 0px -55% 0px'});
+secs.forEach(s=>nio.observe(s));
+
+/* ---------- drill player engine ---------- */
+function makeDrill(cfg){
+  const steps=cfg.steps;let i=0,remain=steps[0][1],run=false,tm=null;
+  const T=cfg.time,N=cfg.name,B=cfg.bar,S=cfg.status,M=cfg.main,IDX=cfg.idx,LIST=cfg.list;
+  function fmt(s){return String(Math.floor(s/60)).padStart(2,'0')+':'+String(Math.ceil(s%60)%60).padStart(2,'0')+(s%60===0?'':(':'+String(Math.round(s%1*100)).padStart(2,'0')))}
+  function fmtS(s){const m=Math.floor(s/60),ss=Math.round(s%60);return String(m).padStart(2,'0')+':'+String(ss).padStart(2,'0')}
+  function draw(){T.textContent=fmtS(Math.max(0,remain));N.textContent=steps[i][0];IDX.textContent=`ВПРАВА ${i+1}/${steps.length}`;
+    B.style.width=((1-remain/steps[i][1])*100)+'%';
+    [...LIST.children].forEach((li,k)=>{li.classList.toggle('active',k===i&&run);li.classList.toggle('done',k<i||(k===i&&!run&&remain<=0));});}
+  function next(){i++;if(i>=steps.length){finish();return}remain=steps[i][1];draw();}
+  function finish(){run=false;clearInterval(tm);M.textContent='▶ Ще раз';S.textContent='✅ Комплекс завершено! Молодець!';beep(523,.12);setTimeout(()=>beep(659,.12),140);setTimeout(()=>beep(784,.22),280);i=steps.length-1;remain=0;draw();}
+  function start(){if(run){run=false;clearInterval(tm);M.textContent='▶ Продовжити';S.textContent='Пауза';return}
+    if(i===steps.length-1&&remain<=0){i=0;remain=steps[0][1];}
+    run=true;M.textContent='⏸ Пауза';S.textContent='Рухаємось! 🔥';
+    tm=setInterval(()=>{remain-=.25;if(remain<=0){beep(760,.1);next();}else draw();},250);}
+  M.onclick=start;cfg.nextB.onclick=()=>{if(i<steps.length-1){i++;remain=steps[i][1];draw();}};
+  cfg.resetB.onclick=()=>{run=false;clearInterval(tm);i=0;remain=steps[0][1];M.textContent='▶ Старт';S.textContent=cfg.idle;draw();};
+  [...LIST.children].forEach((li,k)=>li.onclick=()=>{i=k;remain=steps[k][1];draw();});
+  draw();
+}
+const warmSteps=[['Ходьба на місці з роботою рук',40],['Нахили та повороти голови (плавно!)',40],['Обертання руками та розминка плечей',40],['Нахили тулуба вперед і в сторони',40],['Повороти тулуба вліво-вправо',40],['Обертання тазом',30],['Випади вперед, чергуємо ноги',40],['Присідання, руки вперед',40],['Стрибки «Джампінг Джек»',30],['Ходьба + глибоке дихання',20]];
+const wl=$('#dwList');warmSteps.forEach((s,k)=>{const li=document.createElement('li');li.innerHTML=`<i>${k+1}</i><span>${s[0]}</span><em>${s[1]} с</em>`;wl.appendChild(li);});
+makeDrill({steps:warmSteps,time:$('#dwTime'),name:$('#dwName'),bar:$('#dwBar'),status:$('#dwStatus'),main:$('#dwMain'),nextB:$('#dwNext'),resetB:$('#dwReset'),idx:$('#dwIdx'),list:wl,idle:'Натисни «Старт» і повторюй за інструктором'});
+
+const coolSteps=[['Повільна ходьба, дихання 4-7-8',60],['Розтяжка квадрицепса (по 30 с на ногу)',60],['Нахил до прямих ніг',30],['Розтяжка плечей та рук',30],['Струшування литок + глибокий видих',30]];
+const cl=$('#dcList')||null; /* list visual is separate; use hidden holder */
+const coolHolder=document.createElement('div');coolSteps.forEach(()=>coolHolder.appendChild(document.createElement('li')));
+makeDrill({steps:coolSteps,time:$('#dcTime'),name:$('#dcName'),bar:$('#dcBar'),status:$('#dcStatus'),main:$('#dcMain'),nextB:$('#dcNext'),resetB:$('#dcReset'),idx:$('#dcIdx'),list:coolHolder,idle:'Відновлюємо пульс спокійно і без поспіху'});
+
+/* ---------- breathing ---------- */
+const bc=$('#breathC'),bt=$('#breathT');let brBusy=false;
+$('#breathBtn').onclick=()=>{if(brBusy)return;brBusy=true;const seq=[['ВДИХ',4,'b4'],['ТРИМАЙ',7,'b7'],['ВИДИХ',8,'b8']];let cycle=0;
+  function step(si){if(si>=3){cycle++;if(cycle>=3){bt.textContent='ГОТОВО ✅';bc.className='breath-circle';brBusy=false;toast('🌬️ 3 цикли виконано. Пульс заспокоюється!');return;}si=0;}
+    const[t,d,cls]=seq[si];bt.textContent=t;bc.className='breath-circle '+cls;setTimeout(()=>step(si+1),d*1000);}
+  step(0);};
+
+/* ---------- norms tables ---------- */
+const grades=[12,11,10,9,8,7,6,5,4,3];
+const normsM=[13.5,14.2,14.8,15.4,16.0,16.5,17.0,17.5,18.0,null];
+const normsF=[15.0,15.6,16.2,16.8,17.4,18.0,18.6,19.2,19.8,null];
+function fillTable(el,arr){el.querySelector('tbody').innerHTML='<tr><th>Час, с (не більше)</th>'+arr.map(v=>`<td>${v===null?'>'+ (arr[arr.length-2]??'—') :v.toFixed(1)}</td>`).join('')+'</tr>';}
+fillTable($('#tblM'),normsM);fillTable($('#tblF'),normsF);
+let gender='m';
+function setGender(g){gender=g;$$('.tabs button').forEach(b=>b.classList.toggle('on',b.dataset.g===g));$$('.sw-gender button').forEach(b=>b.classList.toggle('on',b.dataset.g===g));
+  $('#tblM').parentElement.style.display=g==='m'?'':'none';$('#tblF').parentElement.style.display=g==='f'?'':'none';}
+$$('.tabs button').forEach(b=>b.onclick=()=>setGender(b.dataset.g));
+$$('.sw-gender button').forEach(b=>b.onclick=()=>setGender(b.dataset.g));
+setGender('m');
+
+/* ---------- stopwatch ---------- */
+let swRun=false,swT0=0,swEl=0,swRaf=0;
+const swTime=$('#swTime');
+function swFmt(ms){const m=Math.floor(ms/60000),s=Math.floor(ms/1000)%60,h=Math.floor(ms/10)%100;return String(m).padStart(2,'0')+':'+String(s).padStart(2,'0')+'.'+String(h).padStart(2,'0');}
+function swLoop(){if(swRun){swEl=performance.now()-swT0;swTime.textContent=swFmt(swEl);swRaf=requestAnimationFrame(swLoop);}}
+$('#swStart').onclick=()=>{if(swRun)return;swRun=true;swT0=performance.now()-swEl;$('#swRes').innerHTML='';$('#swStart').style.display='none';$('#swStop').style.display='';beep(980,.08);setTimeout(()=>beep(1240,.15),110);toast('🔫 Руш!');swLoop();};
+$('#swStop').onclick=()=>{if(!swRun)return;swRun=false;cancelAnimationFrame(swRaf);$('#swStart').style.display='';$('#swStop').style.display='none';beep(420,.2);evalRun(swEl/1000);};
+$('#swReset').onclick=()=>{swRun=false;cancelAnimationFrame(swRaf);swEl=0;swTime.textContent='00:00.00';$('#swRes').innerHTML='';$('#swStart').style.display='';$('#swStop').style.display='none';$$('.stand td.hit').forEach(td=>td.classList.remove('hit'));};
+function evalRun(sec){const arr=gender==='m'?normsM:normsF;let gi=arr.findIndex(v=>v!==null&&sec<=v);if(gi===-1)gi=9;
+  const g=grades[gi];const tbl=gender==='m'?$('#tblM'):$('#tblF');const cell=tbl.querySelector('tbody').children[0].children[gi+1];if(cell)cell.classList.add('hit');
+  const msg=g>=12?'🏆 Неймовірно! Рівень 12 балів!':g>=10?'🔥 Чудовий результат!':g>=8?'👍 Гідний час, так тримати!':g>=6?'💪 Непогано, є куди рости.':'🐢 Сьогодні важко — наступного разу буде краще!';
+  $('#swRes').innerHTML=`<div class="sw-badge">Твій час: <b style="color:var(--track-d)">${sec.toFixed(2)} с</b> → оцінка <b>${g} балів</b> ${msg}</div>`;}
+
+/* ---------- throw simulator ---------- */
+const G=9.81,H0=1.8;const ang=$('#ang'),spd=$('#spd');let simPts=[];
+function drawSim(){
+  const a=+ang.value,v=+spd.value;$('#angOut').textContent=a+'°';$('#spdOut').textContent=v+' м/с';
+  const rad=a*Math.PI/180,vx=v*Math.cos(rad),vy=v*Math.sin(rad);
+  const T=(vy+Math.sqrt(vy*vy+2*G*H0))/G,d=vx*T,apex=H0+vy*vy/(2*G);
+  const W=1000,gY=330,padL=44,padR=24,top=42;
+  const kx=(W-padL-padR)/Math.max(d,40),ky=(gY-top)/Math.max(apex,8);
+  simPts=[];let dd='';const N=60;
+  for(let i=0;i<=N;i++){const t=T*i/N,x=padL+vx*t*kx,y=gY-(H0+vy*t-G*t*t/2)*ky;simPts.push([x,y]);dd+=(i?'L':'M')+x.toFixed(1)+' '+y.toFixed(1);}
+  $('#simPath').setAttribute('d',dd);
+  let ticks='';for(let m=0;m<=Math.ceil(Math.max(d,40)/10)*10;m+=10){const x=padL+m*kx;if(x>W-padR+2)break;
+    ticks+=`<line x1="${x}" y1="${gY}" x2="${x}" y2="${gY-9}" stroke="#0C7A46" stroke-width="2"/><text x="${x}" y="${gY+24}" text-anchor="middle" font-family="JetBrains Mono" font-size="13" font-weight="700" fill="#0C7A46">${m}м</text>`;}
+  ticks+=`<line x1="${padL}" y1="${gY}" x2="${W-padR}" y2="${gY}" stroke="#0C7A46" stroke-width="3"/><line x1="${padL}" y1="${gY}" x2="${padL}" y2="${top-8}" stroke="#8FB6DA" stroke-width="2" stroke-dasharray="4 5"/>`;
+  $('#simTicks').innerHTML=ticks;
+  $('#simDist').textContent=`≈ ${d.toFixed(1)} м`;
+  $('#outD').textContent=d.toFixed(1)+' м';$('#outT').textContent=T.toFixed(2)+' с';
+  const hint=$('#simHint');
+  if(a<32){hint.textContent='⚠️ Занадто низько — м\'яч «летить у підлогу». Додай кута!';hint.style.color='var(--track-d)';}
+  else if(a<=42){hint.textContent='👌 Оптимальне вікно 32–42° — саме так!';hint.style.color='var(--field-d)';}
+  else{hint.textContent='📈 Забагато «висоти» — втрачаєш дальність.';hint.style.color='var(--sun-d)';}
+  $('#simBall').setAttribute('cx',simPts[0][0]);$('#simBall').setAttribute('cy',simPts[0][1]);
+}
+ang.oninput=drawSim;spd.oninput=drawSim;drawSim();
+let animId=null;
+$('#throwBtn').onclick=()=>{drawSim();cancelAnimationFrame(animId);beep(600,.07,'triangle');
+  const ball=$('#simBall'),pts=simPts,t0=performance.now(),dur=1300;
+  function step(now){let p=Math.min(1,(now-t0)/dur);p=p*p; // ease-in for gravity feel
+    const idx=p*(pts.length-1),i0=Math.floor(idx),i1=Math.min(pts.length-1,i0+1),f=idx-i0;
+    ball.setAttribute('cx',pts[i0][0]+(pts[i1][0]-pts[i0][0])*f);
+    ball.setAttribute('cy',pts[i0][1]+(pts[i1][1]-pts[i0][1])*f);
+    if(p<1)animId=requestAnimationFrame(step);else{beep(300,.12,'square',.1);toast('🥎 М\'яч приземлився! Перевір дальність.');}}
+  animId=requestAnimationFrame(step);};
+
+/* ---------- board ---------- */
+const court=$('#court');const chips=[];
+for(let i=1;i<=6;i++){const c=document.createElement('div');c.className='p-chip'+(i===6?' setter':'');c.textContent=i;c.dataset.i=i-1;court.appendChild(c);chips.push(c);}
+const presetRec=[[22,84],[50,86],[78,84],[36,58],[64,58],[50,32]];
+const presetAtk=[[15,74],[50,86],[85,74],[26,46],[50,34],[74,46]];
+function place(set){set.forEach((p,i)=>{chips[i].style.left=p[0]+'%';chips[i].style.top=p[1]+'%';});}
+place(presetRec);
+$('#presetRec').onclick=()=>{place(presetRec);toast('🧤 Схема прийому подачі 3-1-2');};
+$('#presetAtk').onclick=()=>{place(presetAtk);toast('⚡ Атакувальна схема 4-2');};
+$('#presetReset').onclick=()=>{place(chips.map(()=>[10+Math.random()*38,30+Math.random()*55]));};
+chips.forEach(c=>{
+  c.addEventListener('pointerdown',e=>{e.preventDefault();c.setPointerCapture(e.pointerId);c.classList.add('drag');
+    const move=ev=>{const r=court.getBoundingClientRect();let x=(ev.clientX-r.left)/r.width*100,y=(ev.clientY-r.top)/r.height*100;
+      x=Math.max(4,Math.min(46,x));y=Math.max(7,Math.min(93,y));c.style.left=x+'%';c.style.top=y+'%';};
+    const up=()=>{c.classList.remove('drag');c.removeEventListener('pointermove',move);c.removeEventListener('pointerup',up);};
+    c.addEventListener('pointermove',move);c.addEventListener('pointerup',up);});
+});
+
+/* ---------- quiz ---------- */
+const quiz=[
+ {q:'Який старт використовується у бігу на 100 м?',o:['Високий старт з місця','Низький старт з колодками','Старт з розбігу','Будь-який, як зручно'],c:1,e:'На коротких дистанціях (до 400 м) завжди низький старт — він дає найкраще прискорення.'},
+ {q:'Що робити одразу після перетину лінії фінішу?',o:['Різко зупинитися','Повернутися назад','Плавно пробігти ще 10–15 м','Сісти і відпочити'],c:2,e:'Різка зупинка після спринту небезпечна для серця і судин — швидкість знижуємо поступово.'},
+ {q:'Оптимальний кут випуску м\'яча для максимальної дальності:',o:['10–15°','20–25°','35–42°','60–70°'],c:2,e:'Фізика польоту з урахуванням висоти випуску дає оптимум приблизно 35–42°.'},
+ {q:'Звідки до куда вимірюється результат метання?',o:['Від лінії розбігу до місця падіння','Від місця випуску до найближчого сліду падіння м\'яча','Від будь-якої точки на вибір','Взагалі не вимірюється'],c:1,e:'Вимірюють від місця випуску до найближчого краю сліду, залишеного м\'ячем.'},
+ {q:'Максимальна кількість торкань м\'яча командою у волейболі:',o:['1','2','3','4'],c:2,e:'Три торкання: прийом → передача → атака. Четверте — помилка.'},
+ {q:'Головне завдання заминки:',o:['Швидко втомитися ще більше','Плавно знизити пульс і відновити м\'язи','Підготуватися до нового спринту','Замінити розминку'],c:1,e:'Заминка повертає кров від ніг до серця, знижує ЧСС і зменшує крепатуру.'},
+ {q:'Головне правило безпеки під час метання:',o:['Метати якнайшвидше','Метати і забирати м\'ячі лише за командою викладача','Метати по черзі з одним м\'ячем на двох','Стояти ближче до сектора, щоб бачити політ'],c:1,e:'У секторі метання не повинно бути людей — тому всі дії лише за командою.'}
+];
+let answers=new Array(quiz.length).fill(null),checked=false;
+const ql=$('#quizList');
+quiz.forEach((item,qi)=>{
+  const d=document.createElement('div');d.className='q-card';
+  d.innerHTML=`<h5><span>Q${qi+1}</span>${item.q}</h5>`+item.o.map((o,oi)=>`<label class="opt" data-q="${qi}" data-o="${oi}"><input type="radio" name="q${qi}">${o}</label>`).join('')+`<div class="q-expl" id="ex${qi}">💡 ${item.e}</div>`;
+  ql.appendChild(d);});
+$$('#quizList .opt').forEach(l=>l.onclick=()=>{
+  if(checked)return;const qi=+l.dataset.q,oi=+l.dataset.o;answers[qi]=oi;
+  $$('#quizList .opt').forEach(x=>{if(+x.dataset.q===qi)x.classList.remove('sel');});
+  l.classList.add('sel');l.querySelector('input').checked=true;
+  const n=answers.filter(a=>a!==null).length;$('#quizCount').textContent=`Відповідей: ${n} / ${quiz.length}`;
+  if(n===quiz.length){const b=$('#quizCheck');b.disabled=false;b.style.opacity=1;}});
+$('#quizCheck').onclick=()=>{checked=true;let score=0;
+  quiz.forEach((item,qi)=>{const sel=answers[qi];
+    $$('#quizList .opt').forEach(x=>{const o=+x.dataset.o;
+      if(o===item.c)x.classList.add('ok');
+      else if(o===sel)x.classList.add('bad');
+      x.querySelector('input').disabled=true;});
+    if(sel===item.c)score++;$('#ex'+qi).classList.add('show');});
+  const g=score>=7?12:score===6?10:score===5?8:score===4?6:4;
+  const txt=score>=7?'Блискуче! Теорію засвоєно повністю 🏆':score>=5?'Дуже добре! Переглянь пояснення там, де помилився 😉':'Радимо перечитати матеріал заняття та пройти тест ще раз 💪';
+  $('#qrScore').textContent=`${score} / ${quiz.length}`;
+  $('#qrText').innerHTML=`${txt}<br><span style="color:var(--sun);font-family:var(--mono)">Орієнтовний бал: <b>${g} / 12</b></span>`;
+  $('#quizRes').classList.add('show');$('#quizCheck').style.display='none';$('#quizReset').style.display='';
+  score>=5?toast('🎉 Тест пройдено: '+score+'/7'):toast('Спробуй ще раз — ти зможеш!');};
+$('#quizReset').onclick=()=>{answers=new Array(quiz.length).fill(null);checked=false;
+  $$('#quizList .opt').forEach(x=>{x.classList.remove('sel','ok','bad');const i=x.querySelector('input');i.disabled=false;i.checked=false;});
+  $$('#quizList .q-expl').forEach(e=>e.classList.remove('show'));
+  $('#quizRes').classList.remove('show');$('#quizCheck').style.display='';$('#quizCheck').disabled=true;$('#quizCheck').style.opacity=.5;$('#quizReset').style.display='none';$('#quizCount').textContent='Відповідей: 0 / 7';};
+
+/* ---------- homework checklist ---------- */
+const hwBoxes=$$('#hwCheck input');
+function hwUpd(){const n=hwBoxes.filter(b=>b.checked).length;
+  $('#hwBar').style.width=(n/6*100)+'%';$('#hwCount').textContent=`Виконано: ${n} із 6`;
+  hwBoxes.forEach(b=>b.parentElement.classList.toggle('done',b.checked));
+  if(n===6)toast('🎨 Чек-ліст інфографіки закрито! Можна здавати.');}
+hwBoxes.forEach(b=>b.onchange=hwUpd);
+
+/* ---------- reflection ---------- */
+const emo=['😤','💪','🙂','😴','🤯'];let votes=[0,0,0,0,0],picked=-1;
+const vb=$('#voteBars');emo.forEach((e,i)=>{vb.innerHTML+=`<div class="vbar"><span>${e}</span><div class="track"><i id="vb${i}"></i></div><em id="vc${i}">0</em></div>`;});
+function votesUpd(){const tot=Math.max(1,votes.reduce((a,b)=>a+b,0));votes.forEach((v,i)=>{$('#vb'+i).style.width=(v/tot*100)+'%';$('#vc'+i).textContent=v;});}
+$$('#emoRow .emo').forEach(b=>b.onclick=()=>{
+  if(picked>=0)votes[picked]=Math.max(0,votes[picked]-1);
+  picked=+b.dataset.i;votes[picked]++;votesUpd();
+  $$('#emoRow .emo').forEach(x=>x.classList.remove('picked'));b.classList.add('picked');
+  toast('Дякуємо за відповідь! '+emo[picked]);});
+$('#qSend').onclick=()=>{const t=$('#qText').value.trim();if(!t){toast('✍️ Спершу напиши питання');return;}$('#qText').value='';toast('💬 Питання передано викладачу. Дякуємо!');};
+
+/* welcome */
+setTimeout(()=>toast('👋 Вітаємо на онлайн-занятті! Почни з розминки.'),900);
+</script>
+</body>
+</html>
